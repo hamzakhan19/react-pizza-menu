@@ -60,7 +60,7 @@ function App() {
 function Header() {
   return (
     <header className="header">
-      <h1>Fast React Pizza Co.</h1>;
+      <h1>Fast React Pizza Co.</h1>
     </header>
   );
 }
@@ -70,24 +70,29 @@ function Menu() {
     <main className="menu">
       <h2>Our Menu</h2>
       {pizzaData && (
-        <ul className="pizzas">
-          {pizzaData.map((pizza) => (
-            <Pizza key={pizza.name} pizzaObj={pizza} />
-          ))}
-        </ul>
+        <>
+          <p>
+            Authentic Italian pizzas made with love and the best ingredients
+          </p>
+          <ul className="pizzas">
+            {pizzaData.map((pizza) => (
+              <Pizza key={pizza.name} pizzaObj={pizza} />
+            ))}
+          </ul>
+        </>
       )}
     </main>
   );
 }
 function Pizza({ pizzaObj }) {
-  if (pizzaObj.soldOut) return null;
+  // if (pizzaObj.soldOut) return null;
   return (
-    <li className="pizza">
+    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
       <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div className="">
         <h3> {pizzaObj.name} </h3>
         <p> {pizzaObj.ingredients} </p>
-        <p> {pizzaObj.price} </p>
+        <span>{pizzaObj.soldOut ? "Sold Out" : pizzaObj.price}</span>
       </div>
     </li>
   );
